@@ -1,8 +1,8 @@
 package com.menu.practicaltest.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.menu.practicaltest.R;
 import com.menu.practicaltest.databinding.ActivityMainBinding;
@@ -18,9 +18,12 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, LoginFragment.class, null)
-                .addToBackStack(null)
-                .commit();
+        addLoginFragment();
+    }
+
+    private void addLoginFragment() {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, new LoginFragment(), null)
+                    .commit();
     }
 }
