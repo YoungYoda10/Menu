@@ -5,4 +5,6 @@
     <string name="sign_in">Sign In</string>
     <string name="header1">The easiest way to order</string>
     <string name="header2">No lines. No waiting.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
