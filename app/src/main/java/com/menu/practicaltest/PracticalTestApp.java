@@ -2,6 +2,7 @@ package com.menu.practicaltest;
 
 import android.app.Application;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 public class PracticalTestApp extends Application {
@@ -12,6 +13,7 @@ public class PracticalTestApp extends Application {
         super.onCreate();
         instance = this;
 
+        FirebaseApp.initializeApp(this);
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
     }
 
