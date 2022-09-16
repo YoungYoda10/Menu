@@ -1,7 +1,6 @@
 package com.menu.practicaltest.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.gson.Gson;
+import com.menu.practicaltest.R;
 import com.menu.practicaltest.databinding.FragmentLoginBinding;
-import com.menu.practicaltest.repository.retrofit.RetrofitClient;
 import com.menu.practicaltest.repository.retrofit.body.UserData;
-import com.menu.practicaltest.repository.retrofit.response.LoginResponse;
 import com.menu.practicaltest.ui.viewmodel.LoginFragmentViewModel;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
 
@@ -52,7 +45,7 @@ public class LoginFragment extends Fragment {
                 viewModel.loginUser(new UserData(email, password));
             } else {
                 Toast.makeText(getContext(),
-                        "Email or Password is Empty",
+                        getString(R.string.loginError1),
                         Toast.LENGTH_LONG).show();
             }
         });

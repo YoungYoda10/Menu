@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.google.gson.Gson;
+import com.menu.practicaltest.R;
 import com.menu.practicaltest.repository.retrofit.RetrofitClient;
 import com.menu.practicaltest.repository.retrofit.body.UserData;
 import com.menu.practicaltest.repository.retrofit.response.LoginResponse;
@@ -38,7 +39,7 @@ public class LoginFragmentViewModel extends AndroidViewModel {
                     Log.i("loginResponse", new Gson().toJson(loginResponse));
                 } else {
                     Toast.makeText(getApplication(),
-                            "An error has occurred",
+                            getApplication().getString(R.string.error1),
                             Toast.LENGTH_LONG).show();
                 }
 
@@ -48,7 +49,7 @@ public class LoginFragmentViewModel extends AndroidViewModel {
             public void onFailure(@NonNull Call<LoginResponse> call,
                                   @NonNull Throwable t) {
                 Toast.makeText(getApplication(),
-                        "An error has occurred",
+                        getApplication().getString(R.string.error1),
                         Toast.LENGTH_LONG).show();
             }
         });
