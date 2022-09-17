@@ -9,7 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.google.gson.Gson;
 import com.menu.practicaltest.R;
-import com.menu.practicaltest.repository.retrofit.OnCallResponseType;
+import com.menu.practicaltest.auth.AuthManager;
 import com.menu.practicaltest.repository.retrofit.RetrofitClient;
 import com.menu.practicaltest.repository.retrofit.body.login.UserData;
 import com.menu.practicaltest.repository.retrofit.response.login.LoginResponse;
@@ -21,6 +21,7 @@ import retrofit2.Response;
 public class LoginFragmentViewModel extends AndroidViewModel {
 
     private final RetrofitClient retrofitClient = RetrofitClient.getInstance();
+    private final AuthManager authManager = AuthManager.getInstance();
 
     public LoginFragmentViewModel(@NonNull Application application) {
         super(application);
@@ -32,18 +33,18 @@ public class LoginFragmentViewModel extends AndroidViewModel {
             @Override
             public void onResponse(@NonNull Call<LoginResponse> call,
                                    @NonNull Response<LoginResponse> response) {
-                if (response.isSuccessful()) {
-                    LoginResponse loginResponse = response.body();
-                    Toast.makeText(getApplication(),
-                            "Logged In",
-                            Toast.LENGTH_LONG).show();
+                LoginResponse loginResponse = response.body();
+                if (response.isSuccessful() &&
+                        (loginResponse != null &&
+                                loginResponse.getData() != null &&
+                                loginResponse.getData().getToken() != null)) {
+                    authManager.setAuthToken(loginResponse.getData().getToken().getValue());
                     Log.i("loginResponse", new Gson().toJson(loginResponse));
                 } else {
                     Toast.makeText(getApplication(),
                             getApplication().getString(R.string.error1),
                             Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override

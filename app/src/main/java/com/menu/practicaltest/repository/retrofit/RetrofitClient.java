@@ -18,9 +18,8 @@ public class RetrofitClient {
     }
 
     public static synchronized RetrofitClient getInstance() {
-        if (instance == null) {
+        if (instance == null)
             instance = new RetrofitClient();
-        }
         return instance;
     }
 

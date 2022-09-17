@@ -20,6 +20,8 @@ import com.menu.practicaltest.ui.viewmodel.LoginFragmentViewModel;
 
 public class LoginFragment extends Fragment {
 
+    public static final String TAG = LoginFragment.class.getSimpleName();
+
     private FragmentLoginBinding binding;
     private LoginFragmentViewModel viewModel;
 
