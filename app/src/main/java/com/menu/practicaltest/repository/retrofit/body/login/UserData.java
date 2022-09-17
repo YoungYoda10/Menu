@@ -1,4 +1,4 @@
-package com.menu.practicaltest.repository.retrofit.body;
+package com.menu.practicaltest.repository.retrofit.body.login;
 
 import com.google.gson.annotations.SerializedName;
 

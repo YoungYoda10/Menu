@@ -9,9 +9,10 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.google.gson.Gson;
 import com.menu.practicaltest.R;
+import com.menu.practicaltest.repository.retrofit.OnCallResponseType;
 import com.menu.practicaltest.repository.retrofit.RetrofitClient;
-import com.menu.practicaltest.repository.retrofit.body.UserData;
-import com.menu.practicaltest.repository.retrofit.response.LoginResponse;
+import com.menu.practicaltest.repository.retrofit.body.login.UserData;
+import com.menu.practicaltest.repository.retrofit.response.login.LoginResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,10 +1,9 @@
-
-package com.menu.practicaltest.repository.retrofit.response;
+package com.menu.practicaltest.repository.retrofit.response.venues;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+public class VenuesResponse {
 
     @SerializedName("status")
     @Expose

@@ -1,5 +1,4 @@
-
-package com.menu.practicaltest.repository.retrofit.response;
+package com.menu.practicaltest.repository.retrofit.response.login;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

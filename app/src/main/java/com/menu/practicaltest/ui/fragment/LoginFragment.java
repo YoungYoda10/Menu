@@ -13,7 +13,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.menu.practicaltest.R;
 import com.menu.practicaltest.databinding.FragmentLoginBinding;
-import com.menu.practicaltest.repository.retrofit.body.UserData;
+import com.menu.practicaltest.repository.retrofit.OnCallResponseType;
+import com.menu.practicaltest.repository.retrofit.body.login.UserData;
+import com.menu.practicaltest.repository.retrofit.response.login.LoginResponse;
 import com.menu.practicaltest.ui.viewmodel.LoginFragmentViewModel;
 
 public class LoginFragment extends Fragment {
