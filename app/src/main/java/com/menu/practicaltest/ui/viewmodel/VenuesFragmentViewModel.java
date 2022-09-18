@@ -9,7 +9,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.Gson;
 import com.menu.practicaltest.R;
 import com.menu.practicaltest.repository.retrofit.RetrofitClient;
 import com.menu.practicaltest.repository.retrofit.body.venues.Location;
