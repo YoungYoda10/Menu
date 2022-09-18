@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.menu.practicaltest.R;
 import com.menu.practicaltest.databinding.FragmentVenuesBinding;
 
 public class VenuesFragment extends Fragment {
@@ -28,7 +30,7 @@ public class VenuesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentVenuesBinding.inflate(inflater, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_venues, container, false);
         return binding.getRoot();
     }
 

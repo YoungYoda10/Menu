@@ -8,14 +8,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.menu.practicaltest.R;
 import com.menu.practicaltest.databinding.FragmentLoginBinding;
-import com.menu.practicaltest.repository.retrofit.OnCallResponseType;
 import com.menu.practicaltest.repository.retrofit.body.login.UserData;
-import com.menu.practicaltest.repository.retrofit.response.login.LoginResponse;
 import com.menu.practicaltest.ui.viewmodel.LoginFragmentViewModel;
 
 public class LoginFragment extends Fragment {
@@ -31,7 +30,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         viewModel = new ViewModelProvider(this).get(LoginFragmentViewModel.class);
 
         return binding.getRoot();
