@@ -1,9 +1,11 @@
 package com.menu.practicaltest.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +15,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.menu.practicaltest.R;
 import com.menu.practicaltest.databinding.FragmentVenuesBinding;
+import com.menu.practicaltest.repository.retrofit.OnCallResponseType;
 import com.menu.practicaltest.repository.retrofit.body.venues.Location;
+import com.menu.practicaltest.repository.retrofit.response.venues.VenuesResponse;
 import com.menu.practicaltest.ui.viewmodel.VenuesFragmentViewModel;
 
 public class VenuesFragment extends Fragment {
@@ -47,6 +51,19 @@ public class VenuesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel.getVenues(new Location("44.001783","21.26907"));
+        viewModel.getVenues(
+                new Location("44.001783", "21.26907"),
+                new OnCallResponseType<VenuesResponse>() {
+                    @Override
+                    public void onResult(VenuesResponse venuesResponse) {
+                        Log.i("venuesResponse",
+                                venuesResponse.getData().getVenues().size() + "");
+                    }
+
+                    @Override
+                    public void onError(String err) {
+                        Toast.makeText(getContext(), err, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }
