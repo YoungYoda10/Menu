@@ -30,8 +30,11 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         viewModel = new ViewModelProvider(this).get(LoginFragmentViewModel.class);
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         return binding.getRoot();
     }

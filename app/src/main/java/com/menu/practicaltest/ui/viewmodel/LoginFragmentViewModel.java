@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
@@ -24,11 +25,14 @@ public class LoginFragmentViewModel extends AndroidViewModel {
     private final RetrofitClient retrofitClient = RetrofitClient.getInstance();
     private final AuthManager authManager = AuthManager.getInstance();
 
+    private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
+
     public LoginFragmentViewModel(@NonNull Application application) {
         super(application);
     }
 
     public void loginUser(UserData userData) {
+        isLoading.setValue(true);
         Call<LoginResponse> call = retrofitClient.getMyApi().loginUser(userData);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -39,9 +43,11 @@ public class LoginFragmentViewModel extends AndroidViewModel {
                         (loginResponse != null &&
                                 loginResponse.getData() != null &&
                                 loginResponse.getData().getToken() != null)) {
+                    isLoading.setValue(false);
                     authManager.setAuthToken(loginResponse.getData().getToken().getValue());
                     Log.i("loginResponse", new Gson().toJson(loginResponse));
                 } else {
+                    isLoading.setValue(false);
                     Toast.makeText(getApplication(),
                             getApplication().getString(R.string.error1),
                             Toast.LENGTH_LONG).show();
@@ -51,10 +57,15 @@ public class LoginFragmentViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NonNull Call<LoginResponse> call,
                                   @NonNull Throwable t) {
+                isLoading.setValue(false);
                 Toast.makeText(getApplication(),
                         getApplication().getString(R.string.error1),
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public LiveData<Boolean> getIsLoading() {
+        return isLoading;
     }
 }
