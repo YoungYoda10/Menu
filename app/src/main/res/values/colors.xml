@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="gray_2">#2C2C3133</color>
     <color name="gray">#E5E5E5</color>
     <color name="black">#2C2C31</color>
     <color name="white">#FFFFFFFF</color>
@@ -8,4 +7,5 @@
 
     <color name="background">@color/gray</color>
     <color name="textColor">@color/black</color>
+    <color name="underline">#2C2C3133</color>
 </resources>
