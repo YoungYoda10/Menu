@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.menu.practicaltest.BuildConfig;
 import com.menu.practicaltest.R;
 import com.menu.practicaltest.databinding.FragmentLoginBinding;
 import com.menu.practicaltest.repository.retrofit.body.login.UserData;
@@ -28,8 +29,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(LoginFragmentViewModel.class);
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
@@ -43,6 +43,9 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (BuildConfig.DEBUG)
+            setTestAccountCredentials();
+
         binding.btnSignIn.setOnClickListener(v -> {
             String email = binding.etEmail.getText().toString().trim();
             String password = binding.etPassword.getText().toString().trim();
@@ -50,10 +53,13 @@ public class LoginFragment extends Fragment {
             if (!email.isEmpty() && !password.isEmpty()) {
                 viewModel.loginUser(new UserData(email, password));
             } else {
-                Toast.makeText(getContext(),
-                        getString(R.string.loginError1),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.loginError1), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void setTestAccountCredentials(){
+        binding.etEmail.setText(R.string.mockEmail);
+        binding.etPassword.setText(R.string.mockPassword);
     }
 }
