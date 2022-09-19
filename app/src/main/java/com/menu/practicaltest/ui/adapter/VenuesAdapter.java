@@ -52,10 +52,16 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.MyViewHold
 
         public void bind(Venue venue) {
             //TODO use data from Venue object
-            binding.tvTitle.setText("TEST 123");
-            binding.tvInfo.setText("TEST 456");
-            binding.tvDescription1.setText("TEST 654");
-            binding.tvDescription2.setText("TEST 321");
+
+            String name = venue.getVenue().getName();
+            String distance = venue.getDistanceInMiles() + "m";
+            String address = venue.getVenue().getAddress();
+            String isOpen = venue.getVenue().getIsOpen() ? "Open" : "Closed";
+
+            binding.tvTitle.setText(!name.isEmpty() ? name : "No name");
+            binding.tvInfo.setText(distance);
+            binding.tvDescription1.setText(!address.isEmpty() ? name : "No address");
+            binding.tvDescription2.setText(isOpen);
         }
     }
 }
