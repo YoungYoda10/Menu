@@ -43,8 +43,8 @@ public class LoginFragmentViewModel extends AndroidViewModel {
                         (loginResponse != null &&
                                 loginResponse.getData() != null &&
                                 loginResponse.getData().getToken() != null)) {
-                    isLoading.setValue(false);
                     authManager.setAuthToken(loginResponse.getData().getToken().getValue());
+                    isLoading.setValue(false);
                     Log.i("loginResponse", new Gson().toJson(loginResponse));
                 } else {
                     isLoading.setValue(false);
