@@ -8,4 +8,5 @@
     <color name="background">@color/black</color>
     <color name="textColor">@color/gray</color>
     <color name="underline">@color/white</color>
+    <color name="drawableColor">@color/white</color>
 </resources>

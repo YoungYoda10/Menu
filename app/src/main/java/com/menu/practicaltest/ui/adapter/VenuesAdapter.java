@@ -13,18 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.MyViewHolder> {
-
     private List<Venue> items = new ArrayList<>();
+    private final OnClickListener<Venue> callback;
 
-    public VenuesAdapter() {
+    public VenuesAdapter(OnClickListener<Venue> callback) {
+        this.callback = callback;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemViewVenuesBinding binding = ItemViewVenuesBinding.inflate(
-                LayoutInflater.from(parent.getContext()), parent, false);
-        return new MyViewHolder(binding);
+        ItemViewVenuesBinding binding = ItemViewVenuesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new MyViewHolder(binding, callback);
     }
 
     @Override
@@ -44,17 +44,17 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.MyViewHold
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         private final ItemViewVenuesBinding binding;
+        private final OnClickListener<Venue> callback;
 
-        public MyViewHolder(ItemViewVenuesBinding binding) {
+        public MyViewHolder(ItemViewVenuesBinding binding, OnClickListener<Venue> callback) {
             super(binding.getRoot());
             this.binding = binding;
+            this.callback = callback;
         }
 
         public void bind(Venue venue) {
-            //TODO use data from Venue object
-
             String name = venue.getVenue().getName();
-            String distance = venue.getDistanceInMiles() + "m";
+            String distance = venue.getDistanceInMiles() + "miles";
             String address = venue.getVenue().getAddress();
             String isOpen = venue.getVenue().getIsOpen() ? "Open" : "Closed";
 
@@ -62,6 +62,8 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.MyViewHold
             binding.tvInfo.setText(distance);
             binding.tvDescription1.setText(!address.isEmpty() ? name : "No address");
             binding.tvDescription2.setText(isOpen);
+
+            binding.clWholeView.setOnClickListener(v -> callback.onResult(venue));
         }
     }
 }

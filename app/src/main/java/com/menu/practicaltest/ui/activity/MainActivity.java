@@ -9,22 +9,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.menu.practicaltest.R;
 import com.menu.practicaltest.databinding.ActivityMainBinding;
+import com.menu.practicaltest.repository.retrofit.response.venues.Venue;
 import com.menu.practicaltest.ui.fragment.LoginFragment;
+import com.menu.practicaltest.ui.fragment.VenueFragment;
 import com.menu.practicaltest.ui.fragment.VenuesFragment;
 import com.menu.practicaltest.ui.viewmodel.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-    private MainActivityViewModel viewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        MainActivityViewModel viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         viewModel.getAuthTokenLiveData().observe(this, this::observeAuthToken);
 
         showLoginFragment();
@@ -41,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showLoginFragment() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new LoginFragment(), LoginFragment.TAG)
-                .commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFragment(), LoginFragment.TAG).commit();
     }
 
     private void showVenuesFragment() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new VenuesFragment(), VenuesFragment.TAG)
-                .commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new VenuesFragment(this::showVenueFragment), VenuesFragment.TAG).commit();
+    }
+
+    private void showVenueFragment(Venue venue) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new VenueFragment(venue), VenueFragment.TAG).addToBackStack(null).commit();
     }
 }
