@@ -46,9 +46,9 @@ public class VenueFragment extends Fragment {
 
         Glide.with(this).load(venue.getVenue().getImage().getFullsize()).apply(options).into(binding.imageView);
 
-        binding.tvTitle.setText(!name.isEmpty() ? name : "No name");
-        binding.tvInfo.setText(distance);
-        binding.tvDescription1.setText(!address.isEmpty() ? name : "No address");
-        binding.tvDescription2.setText(isOpen);
+        binding.clWholeView.tvTitle.setText(!name.isEmpty() ? name : "No name");
+        binding.clWholeView.tvInfo.setText(distance);
+        binding.clWholeView.tvDescription1.setText(!address.isEmpty() ? name : "No address");
+        binding.clWholeView.tvDescription2.setText(isOpen);
     }
 }
