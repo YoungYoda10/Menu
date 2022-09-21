@@ -17,6 +17,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="@string/logout"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textColorLink="@color/background"
+            app:layout_constraintEnd_toStartOf="@+id/guideline31"
+            app:layout_constraintTop_toTopOf="@+id/guideline30" />
+
         <include
             android:id="@+id/clWholeView"
             layout="@layout/item_view_venues"
@@ -24,5 +35,19 @@
             android:layout_height="125dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.015625" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.936" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -19,9 +19,12 @@ public class AuthManager {
         authTokenLiveData.setValue(authToken);
     }
 
+    public void logoutUser() {
+        authTokenLiveData.setValue(null);
+    }
+
     public static AuthManager getInstance() {
-        if (instance == null)
-            instance = new AuthManager();
+        if (instance == null) instance = new AuthManager();
         return instance;
     }
 }

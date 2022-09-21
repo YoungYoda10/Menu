@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.menu.practicaltest.R;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showLoginFragment() {
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFragment(), LoginFragment.TAG).commit();
     }
 
