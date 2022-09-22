@@ -5,7 +5,6 @@ import static com.menu.practicaltest.auth.AuthManager.TOKEN;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -76,10 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnSharedPreferenc
 
     private void showFirstFragment() {
         String token = viewModel.getAuthToken();
-        if (token == null) {
-            showLoginFragment();
-        } else {
-            showVenuesFragment();
-        }
+        if (token == null) showLoginFragment();
+        else showVenuesFragment();
     }
 }

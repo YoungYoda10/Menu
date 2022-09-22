@@ -23,7 +23,8 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemViewVenuesBinding binding = ItemViewVenuesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        ItemViewVenuesBinding binding = ItemViewVenuesBinding.inflate(
+                LayoutInflater.from(parent.getContext()), parent, false);
         return new MyViewHolder(binding, callback);
     }
 

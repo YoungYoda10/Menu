@@ -45,10 +45,13 @@ public class VenuesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(VenuesFragmentViewModel.class);
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_venues, container, false);
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_venues, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.setViewModel(viewModel);
 
@@ -59,27 +62,32 @@ public class VenuesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.rvVenues.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        binding.rvVenues.setLayoutManager(
+                new LinearLayoutManager(
+                        getContext(), LinearLayoutManager.VERTICAL, false));
         adapter = new VenuesAdapter(callback);
         binding.rvVenues.setAdapter(adapter);
 
-        viewModel.getVenues(new Location("44.001783", "21.26907"), new OnCallResponseType<VenuesResponse>() {
-            @Override
-            public void onResult(VenuesResponse venuesResponse) {
-                if (isResponseValid(venuesResponse)) {
-                    Log.i("venuesResponse", venuesResponse.getData().getVenues().size() + "");
-                    if (isAdded()) {
-                        adapter.setItems(venuesResponse.getData().getVenues());
-                        Log.i("venuesResponse", "Adapter Item Count: " + adapter.getItemCount());
+        viewModel.getVenues(new Location("44.001783", "21.26907"),
+                new OnCallResponseType<VenuesResponse>() {
+                    @Override
+                    public void onResult(VenuesResponse venuesResponse) {
+                        if (isResponseValid(venuesResponse)) {
+                            Log.i("venuesResponse",
+                                    venuesResponse.getData().getVenues().size() + "");
+                            if (isAdded()) {
+                                adapter.setItems(venuesResponse.getData().getVenues());
+                                Log.i("venuesResponse",
+                                        "Adapter Item Count: " + adapter.getItemCount());
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onError(String err) {
-                Toast.makeText(getContext(), err, Toast.LENGTH_LONG).show();
-            }
-        });
+                    @Override
+                    public void onError(String err) {
+                        Toast.makeText(getContext(), err, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private boolean isResponseValid(VenuesResponse venuesResponse) {
@@ -88,7 +96,8 @@ public class VenuesFragment extends Fragment {
                 if (venuesResponse.getData().getVenues() != null) {
                     return true;
                 } else {
-                    Log.e("venuesResponse", "venuesResponse.getData().getVenues() == null");
+                    Log.e("venuesResponse",
+                            "venuesResponse.getData().getVenues() == null");
                     return false;
                 }
             } else {

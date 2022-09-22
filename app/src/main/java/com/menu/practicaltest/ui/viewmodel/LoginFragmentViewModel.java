@@ -38,15 +38,21 @@ public class LoginFragmentViewModel extends AndroidViewModel {
         Call<LoginResponse> call = retrofitClient.getMyApi().loginUser(userData);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+            public void onResponse(@NonNull Call<LoginResponse> call,
+                                   @NonNull Response<LoginResponse> response) {
                 LoginResponse loginResponse = response.body();
-                if (response.isSuccessful() && (loginResponse != null && loginResponse.getData() != null && loginResponse.getData().getToken() != null)) {
+                if (response.isSuccessful() &&
+                        (loginResponse != null &&
+                                loginResponse.getData() != null &&
+                                loginResponse.getData().getToken() != null)) {
                     authManager.loginUser(loginResponse.getData().getToken().getValue());
                     isLoading.setValue(false);
                     Log.i("loginResponse", new Gson().toJson(loginResponse));
                 } else {
                     isLoading.setValue(false);
-                    Toast.makeText(getApplication(), getApplication().getString(R.string.error1), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),
+                            getApplication().getString(R.string.error1),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 

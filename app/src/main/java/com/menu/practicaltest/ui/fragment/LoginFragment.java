@@ -29,10 +29,13 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(LoginFragmentViewModel.class);
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_login, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.setViewModel(viewModel);
 
@@ -58,7 +61,7 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    private void setTestAccountCredentials(){
+    private void setTestAccountCredentials() {
         binding.etEmail.setText(R.string.mockEmail);
         binding.etPassword.setText(R.string.mockPassword);
     }
