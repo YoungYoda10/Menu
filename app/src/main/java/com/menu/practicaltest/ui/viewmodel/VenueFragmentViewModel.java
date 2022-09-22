@@ -8,10 +8,11 @@ import androidx.lifecycle.AndroidViewModel;
 import com.menu.practicaltest.auth.AuthManager;
 
 public class VenueFragmentViewModel extends AndroidViewModel {
-    private final AuthManager authManager = AuthManager.getInstance();
+    private final AuthManager authManager;
 
     public VenueFragmentViewModel(@NonNull Application application) {
         super(application);
+        authManager = AuthManager.getInstance(application);
     }
 
     public void logoutUser() {

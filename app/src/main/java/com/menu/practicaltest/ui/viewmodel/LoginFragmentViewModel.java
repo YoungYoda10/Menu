@@ -22,13 +22,15 @@ import retrofit2.Response;
 
 public class LoginFragmentViewModel extends AndroidViewModel {
 
-    private final RetrofitClient retrofitClient = RetrofitClient.getInstance();
-    private final AuthManager authManager = AuthManager.getInstance();
+    private final RetrofitClient retrofitClient;
+    private final AuthManager authManager;
 
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
 
     public LoginFragmentViewModel(@NonNull Application application) {
         super(application);
+        retrofitClient = RetrofitClient.getInstance();
+        authManager = AuthManager.getInstance(application);
     }
 
     public void loginUser(UserData userData) {
@@ -36,31 +38,22 @@ public class LoginFragmentViewModel extends AndroidViewModel {
         Call<LoginResponse> call = retrofitClient.getMyApi().loginUser(userData);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<LoginResponse> call,
-                                   @NonNull Response<LoginResponse> response) {
+            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                 LoginResponse loginResponse = response.body();
-                if (response.isSuccessful() &&
-                        (loginResponse != null &&
-                                loginResponse.getData() != null &&
-                                loginResponse.getData().getToken() != null)) {
-                    authManager.setAuthToken(loginResponse.getData().getToken().getValue());
+                if (response.isSuccessful() && (loginResponse != null && loginResponse.getData() != null && loginResponse.getData().getToken() != null)) {
+                    authManager.loginUser(loginResponse.getData().getToken().getValue());
                     isLoading.setValue(false);
                     Log.i("loginResponse", new Gson().toJson(loginResponse));
                 } else {
                     isLoading.setValue(false);
-                    Toast.makeText(getApplication(),
-                            getApplication().getString(R.string.error1),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), getApplication().getString(R.string.error1), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<LoginResponse> call,
-                                  @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                 isLoading.setValue(false);
-                Toast.makeText(getApplication(),
-                        getApplication().getString(R.string.error1),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), getApplication().getString(R.string.error1), Toast.LENGTH_LONG).show();
             }
         });
     }
