@@ -46,16 +46,21 @@ public class MainActivity extends AppCompatActivity implements OnSharedPreferenc
     }
 
     private void showVenuesFragment() {
+        VenuesFragment fragment = new VenuesFragment();
+        fragment.setCallback(this::showVenueFragment);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new VenuesFragment(this::showVenueFragment), VenuesFragment.TAG)
+                .replace(R.id.fragment_container, fragment, VenuesFragment.TAG)
                 .commit();
     }
 
     private void showVenueFragment(Venue venue) {
+        VenueFragment fragment = new VenueFragment();
+        fragment.setVenue(venue);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new VenueFragment(venue), VenueFragment.TAG)
+                .replace(R.id.fragment_container, fragment, VenueFragment.TAG)
                 .addToBackStack(null)
                 .commit();
     }

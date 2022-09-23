@@ -33,9 +33,12 @@ public class VenuesFragment extends Fragment {
 
     private VenuesAdapter adapter;
 
-    private final OnClickListener<Venue> callback;
+    private OnClickListener<Venue> callback;
 
-    public VenuesFragment(OnClickListener<Venue> callback) {
+    public VenuesFragment() {
+    }
+
+    public void setCallback(OnClickListener<Venue> callback){
         this.callback = callback;
     }
 

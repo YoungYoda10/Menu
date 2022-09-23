@@ -26,9 +26,12 @@ public class VenueFragment extends Fragment {
     private FragmentVenueBinding binding;
     private VenueFragmentViewModel viewModel;
 
-    private final Venue venue;
+    private Venue venue;
 
-    public VenueFragment(Venue venue) {
+    public VenueFragment() {
+    }
+
+    public void setVenue(Venue venue) {
         this.venue = venue;
     }
 
@@ -37,6 +40,9 @@ public class VenueFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(VenueFragmentViewModel.class);
+        if (venue!=null){
+            viewModel.setVenue(venue);
+        }
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_venue, container, false);
         return binding.getRoot();
@@ -46,15 +52,15 @@ public class VenueFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String name = venue.getVenue().getName();
-        String distance = venue.getDistanceInMiles() + "miles";
-        String address = venue.getVenue().getAddress();
-        String isOpen = venue.getVenue().getIsOpen() ? "Open" : "Closed";
+        String name = viewModel.getVenue().getVenue().getName();
+        String distance = viewModel.getVenue().getDistanceInMiles() + "miles";
+        String address = viewModel.getVenue().getVenue().getAddress();
+        String isOpen = viewModel.getVenue().getVenue().getIsOpen() ? "Open" : "Closed";
 
-        if (venue.getVenue().getImage() != null) {
+        if (viewModel.getVenue().getVenue().getImage() != null) {
             RequestOptions options = new RequestOptions().centerCrop().error(R.drawable.error);
             Glide.with(this)
-                    .load(venue.getVenue().getImage().getThumbnailMedium())
+                    .load(viewModel.getVenue().getVenue().getImage().getThumbnailMedium())
                     .apply(options)
                     .into(binding.imageView);
         } else if (getContext() != null) {
